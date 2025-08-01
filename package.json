@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "amqp10": "^3.6.0",
+    "axios": "^1.10.0",
+    "dotenv": "^17.2.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "supertest": "^7.1.3"
+  },
+  "name": "testshina1cmock",
+  "version": "1.0.0",
+  "description": "Этот проект предназначен для эмуляции транспортного уровня интеграции 1С через ActiveMQ Artemis в Docker-окружении. Включает mock-шину, кастомный Artemis с REST API и вспомогательные скрипты.",
+  "main": "e2e-test.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs"
+}

@@ -1,0 +1,90 @@
+version: '3.8'
+services:
+  artemis:
+    build:
+      context: ./artemis-container
+      #platform: linux/arm64
+    #image: my-artemis-arm
+    container_name: artemis    
+    env_file: ./.env
+    environment:
+      - ARTEMIS_API_PORT=${ARTEMIS_API_PORT}
+      - ARTEMIS_USER=${ARTEMIS_ADMIN_USER}
+      - ARTEMIS_PASSWORD=${ARTEMIS_ADMIN_PASSWORD}
+      - ARTEMIS_LOG_LEVEL=${ARTEMIS_LOG_LEVEL}
+      - JOLOKIA_OPTS=--host=0.0.0.0 --disable-cors=false --cors-allow-origin=*
+    ports:
+      - "61616:61616"   # JMS, Core
+      - "6698:6698"     # AMQP 1.0
+      - "8161:8161"     # Web Console + Jolokia
+      - "${ARTEMIS_API_PORT}:${ARTEMIS_API_PORT}"     # Node.js API
+    volumes:
+      - artemis_etc:/var/lib/artemis/etc
+      - artemis_data:/var/lib/artemis/data
+    networks:
+      - shina-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${ARTEMIS_API_PORT}/users"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  mock-bus-container:
+    build:
+      context: ./mock-bus-container
+      dockerfile: Dockerfile
+    container_name: mock-bus-container
+    env_file: ./.env
+    environment:
+      - MOCK_API_PORT=${MOCK_API_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_DB=${MONGO_INITDB_DATABASE}
+      - MONGO_USER=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_PASS=${MONGO_INITDB_ROOT_PASSWORD}
+      - ARTEMIS_ADMIN_USER=${ARTEMIS_ADMIN_USER}
+      - ARTEMIS_ADMIN_PASSWORD=${ARTEMIS_ADMIN_PASSWORD}
+      - ARTEMIS_API_URL=${ARTEMIS_API_URL}
+      - JOLOKIA_URL=${JOLOKIA_URL}
+      - BROKER_NAME=${BROKER_NAME}
+    ports:
+      - "9090:9090"
+      - "3090:3090"
+    depends_on:
+      artemis:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+    networks:
+      - shina-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${MOCK_API_PORT}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    ports:
+      - "27027:27017"
+    volumes:
+      - mongo_data:/data/db
+      
+    networks:
+      - shina-net
+
+networks:
+  shina-net:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  artemis_etc:
+  artemis_data:
