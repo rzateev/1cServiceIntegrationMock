@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="90817a8c-76f2-4007-a596-69bd8882e085">
+  <name>ТестированиеМокСервиса</name>
+  <synonym>
+    <key>ru</key>
+    <value>Mock Integration Service</value>
+  </synonym>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:ConfigurationExtension">
+    <defaultRunMode>Checked</defaultRunMode>
+    <usePurposes>Checked</usePurposes>
+    <interfaceCompatibilityMode>Checked</interfaceCompatibilityMode>
+  </extension>
+  <containedObjects classId="9cd510cd-abfc-11d4-9434-004095e12fc7" objectId="edda92f0-601c-49c8-8156-5bd3681d35d5"/>
+  <containedObjects classId="9fcd25a0-4822-11d4-9414-008048da11f9" objectId="e206e61a-79a8-4c44-a46c-cc690f0be05c"/>
+  <containedObjects classId="e3687481-0a87-462c-a166-9f34594f9bba" objectId="6c15aedf-512a-42bb-9e23-5f6edb5c57a4"/>
+  <containedObjects classId="9de14907-ec23-4a07-96f0-85521cb6b53b" objectId="d054d44d-a102-4959-8513-3c40e4c4dd74"/>
+  <containedObjects classId="51f2d5d8-ea4d-4064-8892-82951750031e" objectId="78462f1a-2352-4b42-b8f6-eb818249d6d7"/>
+  <containedObjects classId="e68182ea-4237-4383-967f-90c1e3370bc7" objectId="9b143b9d-b106-4725-b75f-7677406f4e41"/>
+  <containedObjects classId="fb282519-d103-4dd3-bc12-cb271d631dfc" objectId="0831417e-bcf5-44a0-85a8-c4172aca2798"/>
+  <keepMappingToExtendedConfigurationObjectsByIDs>true</keepMappingToExtendedConfigurationObjectsByIDs>
+  <namePrefix>ТМС_</namePrefix>
+  <configurationExtensionCompatibilityMode>8.3.22</configurationExtensionCompatibilityMode>
+  <configurationExtensionPurpose>Customization</configurationExtensionPurpose>
+  <defaultRunMode>ManagedApplication</defaultRunMode>
+  <usePurposes>PersonalComputer</usePurposes>
+  <scriptVariant>Russian</scriptVariant>
+  <version>1.0.1.1</version>
+  <languages uuid="fb1ecc96-f0a1-4c54-98d7-a7bd03c4437a" extendedConfigurationObject="3d51ebcd-cd39-48c6-aa39-8c2ee3624615">
+    <name>Русский</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:LanguageExtension">
+      <extendedConfigurationObject>Checked</extendedConfigurationObject>
+      <languageCode>Checked</languageCode>
+    </extension>
+    <languageCode>ru</languageCode>
+  </languages>
+  <subsystems>Subsystem.ТМС</subsystems>
+  <commonCommands>CommonCommand.ТМС_СервисыИнтеграции</commonCommands>
+  <dataProcessors>DataProcessor.ТМС_ТестированиеМокСервиса</dataProcessors>
+  <informationRegisters>InformationRegister.ТМС_ВходящиеСообщения</informationRegisters>
+  <integrationServices>IntegrationService.ТМС_mockService</integrationServices>
+</mdclass:Configuration>

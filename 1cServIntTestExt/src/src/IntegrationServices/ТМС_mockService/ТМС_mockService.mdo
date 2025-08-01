@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:IntegrationService xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a2377046-3d72-4a22-855f-2611004ea8c3">
+  <producedTypes>
+    <managerType typeId="f1162fd1-0b6b-45d0-9876-b3fc22f649d3" valueTypeId="985b167f-f59e-4560-a006-5799bc814f4e"/>
+  </producedTypes>
+  <name>ТМС_mockService</name>
+  <synonym>
+    <key>ru</key>
+    <value>Mock service</value>
+  </synonym>
+  <externalIntegrationServiceAddress>http://ws69:9090/applications/testAppE2e</externalIntegrationServiceAddress>
+  <integrationServiceChannels uuid="e67bd42d-60d0-49dd-b316-00b8d3e169f3">
+    <producedTypes>
+      <managerType typeId="0b608d1d-5c22-48cf-a1a8-19d2ae42f401" valueTypeId="b00ceaed-df56-42c5-8869-43fa9d436718"/>
+    </producedTypes>
+    <name>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eOutQueue</name>
+    <comment>outbound</comment>
+    <externalIntegrationServiceChannelName>e1c::ТестовыйПроект::Основной::OfficeToShop.e2eOutQueue</externalIntegrationServiceChannelName>
+    <transactioned>true</transactioned>
+  </integrationServiceChannels>
+  <integrationServiceChannels uuid="0563f5aa-8951-4699-9ad4-c52d76f6f0d5">
+    <producedTypes>
+      <managerType typeId="9fcbff88-a997-4dfe-bc5b-5c7a52138311" valueTypeId="8112e3c5-d874-4d4d-9bc5-4da7284ee390"/>
+    </producedTypes>
+    <name>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eInQueue</name>
+    <comment>inbound</comment>
+    <externalIntegrationServiceChannelName>e1c::ТестовыйПроект::Основной::OfficeToShop.e2eInQueue</externalIntegrationServiceChannelName>
+    <messageDirection>Receive</messageDirection>
+    <receiveMessageProcessing>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eInQueueОбработкаПолученияСообщения</receiveMessageProcessing>
+    <transactioned>true</transactioned>
+  </integrationServiceChannels>
+</mdclass:IntegrationService>

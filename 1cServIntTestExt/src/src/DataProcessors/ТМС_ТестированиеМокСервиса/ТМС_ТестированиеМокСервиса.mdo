@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cf11ca8f-baed-403e-be21-a4cf0d6180bc">
+  <producedTypes>
+    <objectType typeId="1b1ca41b-2876-4074-8c0c-dde4b37ee719" valueTypeId="6992f094-c85b-4a68-8c58-77964713e939"/>
+    <managerType typeId="78f75c6d-031e-46c7-bb0d-24c864e6c9f5" valueTypeId="74459c88-a554-4c27-b890-653e94ae28b0"/>
+  </producedTypes>
+  <name>ТМС_ТестированиеМокСервиса</name>
+  <synonym>
+    <key>ru</key>
+    <value>Тестирование мок сервиса</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.ТМС_ТестированиеМокСервиса.Form.Форма</defaultForm>
+  <attributes uuid="2a4e6b84-c282-4845-9090-8526223d8ebe">
+    <name>КоличествоСообщений</name>
+    <synonym>
+      <key>ru</key>
+      <value>Количество сообщений</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <forms uuid="42cf6302-1fa2-4b0c-85ac-0acd13c6c805">
+    <name>Форма</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <commands uuid="a8a6ce1a-8211-493f-b601-6581f4a9ec11">
+    <name>ТестированиеСервисаИнтеграции</name>
+    <synonym>
+      <key>ru</key>
+      <value>Тестирование сервиса</value>
+    </synonym>
+    <group>NavigationPanelImportant</group>
+    <commandParameterType/>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:DataProcessor>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb90aa98-63ba-4a4c-bd71-ad85ebb1ecc1">
+  <name>ТМС_СервисыИнтеграции</name>
+  <synonym>
+    <key>ru</key>
+    <value>Управление сервисами интеграции</value>
+  </synonym>
+  <group>NavigationPanelImportant</group>
+  <commandParameterType/>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>
