@@ -807,7 +807,7 @@
 	// Канал 2
 	СоздатьКанал(БазовыйURL, "e2eInOfficeToOffice", IDПроцесса, "inbound", "OfficeToOffice", Токен);
 	// Канал 3
-	СоздатьКанал(БазовыйURL, "Канал: e2eOutOfficeToShop, очередь: OfficeToShop", IDПроцесса, "outbound", "OfficeToShop", Токен);
+	СоздатьКанал(БазовыйURL, "e2eOutOfficeToShop", IDПроцесса, "outbound", "OfficeToShop", Токен);
 	
 КонецПроцедуры
 

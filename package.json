@@ -2,7 +2,7 @@
   "scripts": {
     "test": "jest",
     "e2e": "node scripts/e2e-test.js",
-    "office-consumer": "node scripts/office-to-shop-consumer.js",
+    "shop-consumer": "node scripts/office-to-shop-consumer.js",
     "office-demo": "node scripts/test-office-to-shop-flow.js",
     "perf-producer": "node scripts/performance-producer.js",
     "perf-consumer": "node scripts/performance-consumer.js",
