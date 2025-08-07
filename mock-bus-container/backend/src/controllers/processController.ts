@@ -3,7 +3,13 @@ import Process from '../models/Process';
 
 export const getAll = async (req: Request, res: Response) => {
   try {
-    const items = await Process.find();
+    // Проверяем наличие параметра applicationId для фильтрации
+    const filter: any = {};
+    if (req.query.applicationId) {
+      filter.applicationId = req.query.applicationId;
+    }
+    
+    const items = await Process.find(filter);
     res.json({ success: true, data: items });
   } catch (err: any) {
     res.status(500).json({ success: false, message: err.message });

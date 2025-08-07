@@ -9,24 +9,33 @@
     <value>Mock service</value>
   </synonym>
   <externalIntegrationServiceAddress>http://ws69:9090/applications/testAppE2e</externalIntegrationServiceAddress>
-  <integrationServiceChannels uuid="e67bd42d-60d0-49dd-b316-00b8d3e169f3">
+  <integrationServiceChannels uuid="282f7c26-6961-4572-8c1e-f9c35a023c56">
     <producedTypes>
-      <managerType typeId="0b608d1d-5c22-48cf-a1a8-19d2ae42f401" valueTypeId="b00ceaed-df56-42c5-8869-43fa9d436718"/>
+      <managerType typeId="753fe0b3-4f15-441d-a4a8-af9b579633e0" valueTypeId="4f356090-55bd-4842-be90-6b7ece9159e9"/>
     </producedTypes>
-    <name>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eOutQueue</name>
+    <name>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eOutOfficeToOffice</name>
     <comment>outbound</comment>
-    <externalIntegrationServiceChannelName>e1c::ТестовыйПроект::Основной::OfficeToShop.e2eOutQueue</externalIntegrationServiceChannelName>
+    <externalIntegrationServiceChannelName>e1c::ТестовыйПроект::Основной::OfficeToShop.e2eOutOfficeToOffice</externalIntegrationServiceChannelName>
     <transactioned>true</transactioned>
   </integrationServiceChannels>
-  <integrationServiceChannels uuid="0563f5aa-8951-4699-9ad4-c52d76f6f0d5">
+  <integrationServiceChannels uuid="267aa0d9-d424-4998-a25a-ab9438ea768b">
     <producedTypes>
-      <managerType typeId="9fcbff88-a997-4dfe-bc5b-5c7a52138311" valueTypeId="8112e3c5-d874-4d4d-9bc5-4da7284ee390"/>
+      <managerType typeId="269a6242-1ea3-4a80-b3ad-999adb90ecf4" valueTypeId="db0b9685-fa3d-42f2-88a2-d94fae1be431"/>
     </producedTypes>
-    <name>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eInQueue</name>
+    <name>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eInOfficeToOffice</name>
     <comment>inbound</comment>
-    <externalIntegrationServiceChannelName>e1c::ТестовыйПроект::Основной::OfficeToShop.e2eInQueue</externalIntegrationServiceChannelName>
+    <externalIntegrationServiceChannelName>e1c::ТестовыйПроект::Основной::OfficeToShop.e2eInOfficeToOffice</externalIntegrationServiceChannelName>
     <messageDirection>Receive</messageDirection>
-    <receiveMessageProcessing>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eInQueueОбработкаПолученияСообщения</receiveMessageProcessing>
+    <receiveMessageProcessing>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eInOfficeToOfficeОбработкаПолученияСообщения</receiveMessageProcessing>
+    <transactioned>true</transactioned>
+  </integrationServiceChannels>
+  <integrationServiceChannels uuid="67e33a44-d9d1-4002-8db2-6807e3b36dc4">
+    <producedTypes>
+      <managerType typeId="ccf293a7-14f0-4066-96d3-67292e903f4c" valueTypeId="268ff713-2875-49e5-8520-e4138e5c2874"/>
+    </producedTypes>
+    <name>e1c_ТестовыйПроект_Основной_OfficeToShop_e2eOutOfficeToShop</name>
+    <comment>outbound</comment>
+    <externalIntegrationServiceChannelName>e1c::ТестовыйПроект::Основной::OfficeToShop.e2eOutOfficeToShop</externalIntegrationServiceChannelName>
     <transactioned>true</transactioned>
   </integrationServiceChannels>
 </mdclass:IntegrationService>

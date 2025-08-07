@@ -61,7 +61,7 @@ jspm_packages/
 .yarn-integrity
 
 # dotenv environment variable files
-# .env
+.env
 # .env.development.local
 # .env.test.local
 # .env.production.local
@@ -123,6 +123,18 @@ public
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Editor files
+*.sublime-project
+*.sublime-workspace
+.atom/
+.brackets.json
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
 
 # Logs
 logs

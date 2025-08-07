@@ -7,7 +7,13 @@ import logger from '../services/logger';
 
 export const getAll = async (req: Request, res: Response) => {
   try {
-    const items = await Channel.find();
+    // Проверяем наличие параметра processId для фильтрации
+    const filter: any = {};
+    if (req.query.processId) {
+      filter.processId = req.query.processId;
+    }
+    
+    const items = await Channel.find(filter);
     res.json({ success: true, data: items });
   } catch (err: any) {
     res.status(500).json({ success: false, message: err.message });

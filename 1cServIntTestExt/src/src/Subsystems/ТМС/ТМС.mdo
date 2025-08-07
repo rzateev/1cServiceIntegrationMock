@@ -3,7 +3,7 @@
   <name>ТМС</name>
   <synonym>
     <key>ru</key>
-    <value>Mock Integration Service</value>
+    <value>Service Integration (mock)</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>

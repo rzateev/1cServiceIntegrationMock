@@ -12,10 +12,38 @@ const IntegrationTestPage: React.FC = () => {
   const [metaResult, setMetaResult] = useState<string>('');
   const [runtimeResult, setRuntimeResult] = useState<string>('');
   const [loading, setLoading] = useState(false);
+  const [curlCommands, setCurlCommands] = useState<{
+    auth: string;
+    metadata: string;
+    runtime: string;
+  }>({ auth: '', metadata: '', runtime: '' });
 
   useEffect(() => {
     axios.get('/api/applications').then(res => setApps(res.data.data));
   }, []);
+
+  const generateCurlCommands = (app: any, token?: string) => {
+    const clientId = app.name;
+    const clientSecret = app.clientSecret;
+    const base64 = btoa(`${clientId}:${clientSecret}`);
+    
+    const authCommand = `curl -X POST http://localhost:9090/auth/oidc/token \\
+  -H "Content-Type: application/x-www-form-urlencoded" \\
+  -H "Authorization: Basic ${base64}" \\
+  -d "grant_type=client_credentials"`;
+    
+    const metadataCommand = `curl -H "Authorization: Bearer ${token || '<token>'}" \\
+  http://localhost:9090/applications/${clientId}/sys/esb/metadata/channels`;
+    
+    const runtimeCommand = `curl -H "Authorization: Bearer ${token || '<token>'}" \\
+  http://localhost:9090/applications/${clientId}/sys/esb/runtime/channels`;
+    
+    setCurlCommands({
+      auth: authCommand,
+      metadata: metadataCommand,
+      runtime: runtimeCommand
+    });
+  };
 
   const getTicket = async () => {
     if (!selectedApp) return;
@@ -32,6 +60,7 @@ const IntegrationTestPage: React.FC = () => {
       });
       setTicket(res.data.id_token);
       message.success('Билет получен');
+      generateCurlCommands(selectedApp, res.data.id_token);
     } catch {
       // Ошибка обработана перехватчиком
     } finally {
@@ -88,6 +117,13 @@ const IntegrationTestPage: React.FC = () => {
           <div>
             <Text>Client Secret (OIDC): <code>{selectedApp.clientSecret}</code> <CopyOutlined onClick={() => navigator.clipboard.writeText(selectedApp.clientSecret)} /></Text><br/>
             <Text>ID Token (AMQP): <code>{selectedApp.id_token}</code> <CopyOutlined onClick={() => navigator.clipboard.writeText(selectedApp.id_token)} /></Text>
+            <Button 
+              size="small" 
+              onClick={() => generateCurlCommands(selectedApp)} 
+              style={{ marginTop: 8 }}
+            >
+              Сгенерировать команды curl
+            </Button>
           </div>
         )}
         <Button type="primary" onClick={getTicket} disabled={!selectedApp} loading={loading}>Получить билет</Button>
@@ -101,6 +137,54 @@ const IntegrationTestPage: React.FC = () => {
         <Button onClick={testRuntime} disabled={!ticket || !selectedApp} loading={loading}>Проверить runtime каналов</Button>
         {runtimeResult && (
           <pre style={{ background: '#f6f6f6', padding: 12, borderRadius: 4 }}>{runtimeResult}</pre>
+        )}
+        
+        {/* Секция с командами curl */}
+        {(curlCommands.auth || curlCommands.metadata || curlCommands.runtime) && (
+          <div style={{ marginTop: 16 }}>
+            <Text strong>Команды curl для тестирования:</Text>
+            <div style={{ marginTop: 8 }}>
+              <Text strong>1. Аутентификация:</Text>
+              <pre style={{ background: '#f6f6f6', padding: 12, borderRadius: 4, marginTop: 4 }}>
+                {curlCommands.auth}
+              </pre>
+              <Button 
+                size="small" 
+                onClick={() => navigator.clipboard.writeText(curlCommands.auth)}
+                style={{ marginBottom: 8 }}
+              >
+                Копировать
+              </Button>
+            </div>
+            
+            <div style={{ marginTop: 8 }}>
+              <Text strong>2. Метаданные каналов:</Text>
+              <pre style={{ background: '#f6f6f6', padding: 12, borderRadius: 4, marginTop: 4 }}>
+                {curlCommands.metadata}
+              </pre>
+              <Button 
+                size="small" 
+                onClick={() => navigator.clipboard.writeText(curlCommands.metadata)}
+                style={{ marginBottom: 8 }}
+              >
+                Копировать
+              </Button>
+            </div>
+            
+            <div style={{ marginTop: 8 }}>
+              <Text strong>3. Runtime конфигурация:</Text>
+              <pre style={{ background: '#f6f6f6', padding: 12, borderRadius: 4, marginTop: 4 }}>
+                {curlCommands.runtime}
+              </pre>
+              <Button 
+                size="small" 
+                onClick={() => navigator.clipboard.writeText(curlCommands.runtime)}
+                style={{ marginBottom: 8 }}
+              >
+                Копировать
+              </Button>
+            </div>
+          </div>
         )}
       </Space>
     </Card>
