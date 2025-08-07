@@ -1,0 +1,52 @@
+# Устанавливаем LF как стандарт для всех текстовых файлов
+* text=auto eol=lf
+
+# Бинарные файлы
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+
+# Скрипты Windows должны использовать CRLF
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Скрипты Unix должны использовать LF
+*.sh text eol=lf
+*.ps1 text eol=lf
+
+# Документация
+*.md text diff=markdown
+*.txt text
+
+# Конфигурационные файлы
+*.json text
+*.yml text
+*.yaml text
+*.xml text
+*.properties text
+*.conf text
+*.config text
+
+# Исходный код
+*.js text
+*.ts text
+*.jsx text
+*.tsx text
+*.css text
+*.scss text
+*.html text
+*.vue text
+
+# Docker файлы
+Dockerfile text
+*.dockerfile text
+docker-compose*.yml text 

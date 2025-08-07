@@ -45,23 +45,25 @@ const ApplicationTable: React.FC = () => {
     const amqp_test = {
       applicationName: 'testAppE2e',
       processName: 'e1c::ТестовыйПроект::Основной::OfficeToShop',
-      inChannelName: 'e2eInQueue',
-      outChannelName: 'e2eOutQueue',
+      outChannelOfficeToOffice: 'e2eOutOfficeToOffice',
+      outChannelOfficeToShop: 'e2eOutOfficeToShop',
+      inChannelOfficeToOffice: 'e2eInOfficeToOffice',
     };
 
     message.info('Запуск создания тестовых данных E2E...');
 
     try {
       // 1. Очистка (игнорируем ошибки 404, если сущностей нет, с помощью validateStatus)
-      message.loading({ content: 'Шаг 1/4: Очистка старых данных...', key: 'e2e' });
+      message.loading({ content: 'Шаг 1/5: Очистка старых данных...', key: 'e2e' });
       const silentDelete = { validateStatus: (status: number) => (status >= 200 && status < 300) || status === 404 };
       await axios.delete(`/api/applications/by-name/${amqp_test.applicationName}`, silentDelete);
       await axios.delete(`/api/processes/by-name/${amqp_test.processName}`, silentDelete);
-      await axios.delete(`/api/channels/by-name/${amqp_test.inChannelName}`, silentDelete);
-      await axios.delete(`/api/channels/by-name/${amqp_test.outChannelName}`, silentDelete);
+      await axios.delete(`/api/channels/by-name/${amqp_test.outChannelOfficeToOffice}`, silentDelete);
+      await axios.delete(`/api/channels/by-name/${amqp_test.outChannelOfficeToShop}`, silentDelete);
+      await axios.delete(`/api/channels/by-name/${amqp_test.inChannelOfficeToOffice}`, silentDelete);
 
       // 2. Создание приложения
-      message.loading({ content: 'Шаг 2/4: Создание приложения...', key: 'e2e' });
+      message.loading({ content: 'Шаг 2/5: Создание приложения...', key: 'e2e' });
       const appResponse = await axios.post('/api/applications', {
         name: amqp_test.applicationName,
         description: 'Тестовое приложение для E2E-теста',
@@ -70,26 +72,35 @@ const ApplicationTable: React.FC = () => {
       const application = appResponse.data.data;
 
       // 3. Создание процесса
-      message.loading({ content: 'Шаг 3/4: Создание процесса...', key: 'e2e' });
+      message.loading({ content: 'Шаг 3/5: Создание процесса...', key: 'e2e' });
       const processResponse = await axios.post('/api/processes', {
         name: amqp_test.processName,
         applicationId: application._id,
       });
       const process = processResponse.data.data;
 
-      // 4. Создание каналов
-      message.loading({ content: 'Шаг 4/4: Создание каналов...', key: 'e2e' });
+      // 4. Создание каналов для OfficeToOffice (автоматическое потребление)
+      message.loading({ content: 'Шаг 4/5: Создание каналов OfficeToOffice...', key: 'e2e' });
       await axios.post('/api/channels', {
-        name: amqp_test.outChannelName,
+        name: amqp_test.outChannelOfficeToOffice,
         processId: process._id,
         direction: 'outbound',
-        destination: 'Office',
+        destination: 'OfficeToOffice',
       });
       await axios.post('/api/channels', {
-        name: amqp_test.inChannelName,
+        name: amqp_test.inChannelOfficeToOffice,
         processId: process._id,
         direction: 'inbound',
-        destination: 'Office',
+        destination: 'OfficeToOffice',
+      });
+
+      // 5. Создание канала для OfficeToShop (без автоматического потребления)
+      message.loading({ content: 'Шаг 5/5: Создание канала OfficeToShop...', key: 'e2e' });
+      await axios.post('/api/channels', {
+        name: amqp_test.outChannelOfficeToShop,
+        processId: process._id,
+        direction: 'outbound',
+        destination: 'OfficeToShop',
       });
 
       message.success({ content: 'Тестовые данные E2E успешно созданы!', key: 'e2e', duration: 5 });

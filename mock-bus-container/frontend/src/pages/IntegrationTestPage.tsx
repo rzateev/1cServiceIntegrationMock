@@ -25,6 +25,7 @@ const IntegrationTestPage: React.FC = () => {
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const [use1CProperties, setUse1CProperties] = useState(false);
   const [properties1C, setProperties1C] = useState<Property1C[]>([]);
+  const [selectedChannel, setSelectedChannel] = useState<any | null>(null);
 
   // Инициализация свойств 1С по умолчанию
   const initialize1CProperties = () => {
@@ -70,6 +71,7 @@ const IntegrationTestPage: React.FC = () => {
       setIdToken('');
     }
     form.setFieldsValue({ queue: null }); // Reset queue selection
+    setSelectedChannel(null); // Reset selected channel
   }, [selectedApp, processes, channels, form]);
 
   const getTokenForApp = async (app: any) => {
@@ -267,13 +269,30 @@ const IntegrationTestPage: React.FC = () => {
           <Form.Item name="artemisPort" label="Port Artemis" rules={[{ required: true, message: 'Введите порт' }]}>
             <Input type="number" />
           </Form.Item>
-          <Form.Item name="queue" label="Очередь" rules={[{ required: true, message: 'Выберите очередь' }]}>
-            <Select placeholder="Выберите очередь из списка" disabled={!selectedApp}>
+          <Form.Item name="queue" label="Канал" rules={[{ required: true, message: 'Выберите канал' }]}>
+            <Select 
+              placeholder="Выберите канал из списка" 
+              disabled={!selectedApp}
+              onChange={(value) => {
+                const channel = filteredChannels.find(c => c.name === value);
+                setSelectedChannel(channel);
+              }}
+            >
               {filteredChannels.map(channel => (
                 <Select.Option key={channel._id} value={channel.name}>{channel.name}</Select.Option>
               ))}
             </Select>
           </Form.Item>
+          
+          {selectedChannel && (
+            <Form.Item label="Очередь (destination)">
+              <Input 
+                value={selectedChannel.destination || 'Не указано'} 
+                readOnly 
+                style={{ backgroundColor: '#f5f5f5' }}
+              />
+            </Form.Item>
+          )}
           <Form.Item name="message" label="Сообщение" rules={[{ required: true, message: 'Введите сообщение для отправки' }]}>
             <Input.TextArea 
               rows={3} 

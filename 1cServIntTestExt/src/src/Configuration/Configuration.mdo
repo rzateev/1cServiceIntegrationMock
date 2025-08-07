@@ -36,7 +36,11 @@
     <languageCode>ru</languageCode>
   </languages>
   <subsystems>Subsystem.ТМС</subsystems>
+  <commonModules>CommonModule.ТМС_РаботаССервисомИнтеграции</commonModules>
+  <commonModules>CommonModule.ТМС_ОбщегоНазначенияКлиентСервер</commonModules>
+  <commonModules>CommonModule.ТМС_ОбщегоНазначенияВызовСервера</commonModules>
   <commonCommands>CommonCommand.ТМС_СервисыИнтеграции</commonCommands>
+  <constants>Constant.ТМС_ПараметрыСервисаИнтеграции</constants>
   <dataProcessors>DataProcessor.ТМС_ТестированиеМокСервиса</dataProcessors>
   <informationRegisters>InformationRegister.ТМС_ВходящиеСообщения</informationRegisters>
   <integrationServices>IntegrationService.ТМС_mockService</integrationServices>

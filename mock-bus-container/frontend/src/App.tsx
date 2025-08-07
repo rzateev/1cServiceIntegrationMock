@@ -34,12 +34,12 @@ const HeaderUser: React.FC = () => {
 const App: React.FC = () => {
 
     const menuItems = [
-        { key: 'applications', icon: <AppstoreOutlined />, label: <Link to="/applications">Applications</Link> },
-        { key: 'processes', icon: <ClusterOutlined />, label: <Link to="/processes">Processes</Link> },
-        { key: 'channels', icon: <ApartmentOutlined />, label: <Link to="/channels">Channels</Link> },
-        { key: 'users', icon: <UserOutlined />, label: <Link to="/users">Users</Link> },
-        { key: 'integration-test', icon: <AppstoreOutlined />, label: <Link to="/integration-test">Тест Artemis</Link> },
+        { key: 'applications', icon: <AppstoreOutlined />, label: <Link to="/applications">Приложения</Link> },
+        { key: 'processes', icon: <ClusterOutlined />, label: <Link to="/processes">Процессы</Link> },
+        { key: 'channels', icon: <ApartmentOutlined />, label: <Link to="/channels">Каналы</Link> },
+        { key: 'users', icon: <UserOutlined />, label: <Link to="/users">Пользователи</Link> },        
         { key: 'api-test', icon: <AppstoreOutlined />, label: <Link to="/api-test">Проверка API</Link> },
+        { key: 'integration-test', icon: <AppstoreOutlined />, label: <Link to="/integration-test">Проверка каналов</Link> },
       ];
 
     return (
@@ -49,7 +49,7 @@ const App: React.FC = () => {
                     <Layout style={{ minHeight: '100vh' }}>
                         <Sider breakpoint="lg" collapsedWidth="0">
                             <div style={{ height: 32, margin: 16, color: '#fff', fontWeight: 'bold', textAlign: 'center' }}>
-                                Mock Service Integration 1C
+                                Сервис интеграции (Mock-сервис) 
                             </div>
                             <Menu theme="dark" mode="inline" items={menuItems} />
                         </Sider>
@@ -64,8 +64,8 @@ const App: React.FC = () => {
                                     <Route path="/processes" element={<PrivateRoute><ProcessTable /></PrivateRoute>} />
                                     <Route path="/channels" element={<PrivateRoute><ChannelTable /></PrivateRoute>} />
                                     <Route path="/users" element={<PrivateRoute><UserTable /></PrivateRoute>} />
-                                    <Route path="/integration-test" element={<PrivateRoute><IntegrationTestPage /></PrivateRoute>} />
                                     <Route path="/api-test" element={<PrivateRoute><ApiTestPage /></PrivateRoute>} />
+                                    <Route path="/integration-test" element={<PrivateRoute><IntegrationTestPage /></PrivateRoute>} />                                    
                                     <Route path="*" element={<PrivateRoute><ApplicationTable /></PrivateRoute>} />
                                 </Routes>
                             </Content>

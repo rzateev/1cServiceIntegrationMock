@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa3957bc-991d-42e0-9b7e-17196b267789">
+  <producedTypes>
+    <managerType typeId="b8b4463e-e70e-4a43-832a-0f9edbd58f99" valueTypeId="f16ced4b-9848-4f0b-aec9-356999670092"/>
+    <valueManagerType typeId="e93feed2-80a9-432e-9792-162696654c77" valueTypeId="00ef7c16-2ad0-400d-999a-e5443626af69"/>
+    <valueKeyType typeId="82b7e962-018f-43ae-b457-5d08d6fc0f8f" valueTypeId="1a99991a-0431-4cf9-a167-0b80308ae9e0"/>
+  </producedTypes>
+  <name>ТМС_ПараметрыСервисаИнтеграции</name>
+  <synonym>
+    <key>ru</key>
+    <value>Параметры сервиса интеграции</value>
+  </synonym>
+  <type>
+    <types>ValueStorage</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>
